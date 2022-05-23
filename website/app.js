@@ -9,19 +9,19 @@ let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 // Event listener to add function to existing HTML DOM element
-btn.addEventListener('click', perAction);
+btn.addEventListener('click', Action);
 /* Function called by event listener */
-const perAction = () => {
+function Action () {
     let Zip = document.getElementById('zip').value;
     getData(URL, Zip, Key)
     .then((result) => {
-        console.log(result)
+        console.log(result);
         let feelings = document.getElementById('feelings').value;
         postData('/addData', {date: newDate, temp: result.main.temp, content: feelings});
         
     })
     .then((response) => {
-        allData();
+        retrieveData();
     })
     .catch((err) => {
         console.error(err);
@@ -56,11 +56,19 @@ const postData = async (url = '', data = '') => {
 
 /* Function to GET Project Data */
 
-const allData = async () => {
-        const res = await fetch('/all');
-        const response = await res.json()
-        document.getElementById('date').innerHTML = response.date;
-        document.getElementById('temp').innerHTML = response.temp;
-        document.getElementById('content').innerHTML = response.content;
-        console.log(response);
-}
+const retrieveData = async () =>{
+    const request = await fetch('/all');
+    try {
+    // Transform into JSON
+    const allData = await request.json()
+    console.log(allData)
+    // Write updated data to DOM elements
+    document.getElementById('temp').innerHTML = Math.round(allData.temp)+ ' ' +'degrees';
+    document.getElementById('content').innerHTML = allData.content;
+    document.getElementById('date').innerHTML =allData.date;
+    }
+    catch(error) {
+      console.log("error", error);
+      // appropriately handle the error
+    }
+   }

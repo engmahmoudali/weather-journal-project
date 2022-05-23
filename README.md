@@ -4,7 +4,7 @@
 
 ## Project Description
 
-* website template mostly from udacity's startup project but i did the backend by node js and app.js
+* website template mostly from udacity's startup project but i did the backend by node js and   app.js
 * using ES6 mostly in project
 * using async functions mostly too
 
@@ -32,6 +32,16 @@
 * Function to GET Web API Data from weathersite API
 * Function to POST data to server
 * Functions to GET server data
+
+# In Index.html
+
+* Edits in entryHolder Section
+
+# In Style.css
+
+* Edits #app style
+* Add class called line
+* Some Edits
 
 ## Notes :- Nothing Edited in css or html files
 
